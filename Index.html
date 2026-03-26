@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSHOP UNLIMITED | DATABASE 04</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Outfit:wght@400;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --accent: #ff0000; --glow: #ff0000; }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- VIDEO BACKGROUND ENGINE --- */
+        #video-bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden;
+        }
+
+        #bg-video { width: 100%; height: 100%; object-fit: cover; }
+
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); 
+        }
+
+        /* --- THEME ACCENTS --- */
+        body.akatsuki { --accent: #ff1111; --glow: #ff0000; }
+        body.zenitsu { --accent: #ffee00; --glow: #ffaa00; }
+        body.jujutsu { --accent: #a700ff; --glow: #8b5cf6; }
+        body.cyberpunk { --accent: #00ffcc; --glow: #00ffff; }
+
+        .anime-text { font-family: 'Teko', sans-serif; text-transform: uppercase; line-height: 0.9; }
+
+        .service-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--accent);
+            transition: 0.4s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px -10px var(--glow);
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            font-family: 'Teko', sans-serif;
+            font-size: 1.4rem;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+
+        /* Discord Button Styling */
+        .discord-btn {
+            background: #5865F2;
+            color: white;
+            font-family: 'Teko', sans-serif;
+            padding: 5px 15px;
+            border-radius: 4px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
+
+        .nav-link { font-family: 'Teko', sans-serif; cursor: pointer; transition: 0.3s; color: #aaa; font-size: 1.5rem; }
+        .nav-link.active, .nav-link:hover { color: var(--accent); text-shadow: 0 0 10px var(--glow); }
+
+        #modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 1000; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body class="akatsuki">
+
+    <div id="video-bg-container">
+        <video id="bg-video" autoplay muted loop playsinline>
+            <source id="video-source" src="akatsuki.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <nav class="bg-black/80 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <span class="anime-text text-5xl tracking-tighter">XSHOP <span style="color:var(--accent)">UNLIMITED</span></span>
+            
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex gap-6">
+                    <div class="nav-link active" onclick="showPage('home', this)">HOME</div>
+                    <div class="nav-link" onclick="showPage('recovery', this)">RECOVERY</div>
+                    <div class="nav-link" onclick="showPage('social', this)">SOCIAL</div>
+                </div>
+
+                <a href="#" class="discord-btn text-xl">
+                    <span>DISCORD</span>
+                </a>
+
+                <select onchange="setTheme(this.value)" class="bg-black border border-[var(--accent)] text-white p-2 font-bold uppercase text-xs">
+                    <option value="akatsuki">Akatsuki Red</option>
+                    <option value="zenitsu">Zenitsu Thunder</option>
+                    <option value="jujutsu">Jujutsu Purple</option>
+                    <option value="cyberpunk">Cyber Neon</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        
+        <section id="home" class="page-content block">
+            <div class="mb-12 border-l-8 border-[var(--accent)] pl-6">
+                <h2 class="anime-text text-7xl uppercase">Database_<span style="color:var(--accent)">Core</span></h2>
+                <p class="text-zinc-400 font-bold tracking-widest uppercase">Premium GTA V Upgrades</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="service-card p-8">
+                    <h3 class="anime-text text-4xl mb-2">CASH DROP</h3>
+                    <p class="text-zinc-400 mb-8">15 Billion Banked Cash - Safe Method</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl font-bold">$12.00</span>
+                        <button onclick="openModal('Cash Drop', '12.00')" class="buy-btn px-8 py-2">GET ACCESS</button>
+                    </div>
+                </div>
+                <div class="service-card p-8">
+                    <h3 class="anime-text text-4xl mb-2">RANK MASTER</h3>
+                    <p class="text-zinc-400 mb-8">Instant Level 120 + All Skills Max</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl font-bold">$10.00</span>
+                        <button onclick="openModal('Rank Master', '10.00')" class="buy-btn px-8 py-2">GET ACCESS</button>
+                    </div>
+                </div>
+                <div class="service-card p-8">
+                    <h3 class="anime-text text-4xl mb-2">ELITE UNLOCK</h3>
+                    <p class="text-zinc-400 mb-8">All Weapons & Clothing Unlocked</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl font-bold">$15.00</span>
+                        <button onclick="openModal('Elite Unlock', '15.00')" class="buy-btn px-8 py-2">GET ACCESS</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recovery" class="page-content hidden">
+            <h2 class="anime-text text-7xl mb-12 uppercase">Recovery_<span style="color:var(--accent)">Mods</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="service-card p-8 flex justify-between items-center">
+                    <div>
+                        <h3 class="anime-text text-4xl">GENDER SWAP</h3>
+                        <p class="text-zinc-400">Switch character gender safely</p>
+                    </div>
+                    <button onclick="openModal('Gender Swap', '20.00')" class="buy-btn px-10 py-3">$20</button>
+                </div>
+                <div class="service-card p-8 flex justify-between items-center">
+                    <div>
+                        <h3 class="anime-text text-4xl">MODDED TATTOOS</h3>
+                        <p class="text-zinc-400">Exclusive Stacked Outfits</p>
+                    </div>
+                    <button onclick="openModal('Modded Tattoos', '25.00')" class="buy-btn px-10 py-3">$25</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="social" class="page-content hidden">
+            <h2 class="anime-text text-7xl mb-12 uppercase">Social_<span style="color:var(--accent)">Link</span></h2>
+            <div class="grid grid-cols-1 gap-8">
+                <div class="service-card p-12 text-center max-w-3xl mx-auto w-full">
+                    <h3 class="anime-text text-5xl mb-4">SOCIAL CLUB LINKING</h3>
+                    <p class="text-xl text-zinc-300 mb-8">Transfer progress between platforms via Social Club bypass.</p>
+                    <button onclick="openModal('Social Club Linking', '35.00')" class="buy-btn px-16 py-4 text-3xl">PURCHASE NOW - $35</button>
+                </div>
+
+                <div class="service-card p-12 text-center max-w-3xl mx-auto w-full">
+                    <h3 class="anime-text text-5xl mb-4 text-[var(--accent)]">MODDED CREW COLOR</h3>
+                    <p class="text-xl text-zinc-300 mb-4">Send Name of The Color and the login to SocialClub and we make the rest.</p>
+                    <p class="text-lg text-red-500 font-bold mb-8 uppercase tracking-tighter bg-red-500/10 py-2">
+                        DONT BE LOGGED IN IF WE CHANGE IT YOU HAVE TO RESTART THE FULL GAME!
+                    </p>
+                    <button onclick="openModal('Modded Crew Color', '35.00')" class="buy-btn px-16 py-4 text-3xl">PURCHASE NOW - $35</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="mt-20 border-t border-white/10 pt-16 text-center">
+            <h3 class="anime-text text-5xl mb-4">JOIN THE COMMUNITY</h3>
+            <p class="text-zinc-400 mb-8">Access giveaways and instant support via our Discord.</p>
+            <a href="#" class="discord-btn mx-auto w-fit px-12 py-4 text-3xl uppercase tracking-widest">
+                JOIN DISCORD SERVER
+            </a>
+        </div>
+    </main>
+
+    <div id="modal-overlay">
+        <div class="bg-black border-2 border-[var(--accent)] p-12 max-w-lg w-full relative">
+            <button onclick="closeModal()" class="absolute top-4 right-6 text-5xl">&times;</button>
+            <h2 id="modal-title" class="anime-text text-6xl text-[var(--accent)] mb-2">SERVICE</h2>
+            <p id="modal-price" class="text-3xl font-bold mb-8">$0.00</p>
+            <input type="text" placeholder="DISCORD ID" class="w-full bg-zinc-900 border border-zinc-700 p-4 mb-4 text-white outline-none">
+            <button class="w-full bg-[var(--accent)] py-4 text-3xl anime-text">INITIALIZE CHECKOUT</button>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId, btn) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function setTheme(theme) {
+            document.body.className = theme;
+            const video = document.getElementById('bg-video');
+            const source = document.getElementById('video-source');
+            source.src = theme + ".mp4"; 
+            video.load();
+            video.play().catch(e => console.log("Autoplay blocked"));
+        }
+
+        function openModal(title, price) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = "$" + price;
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
